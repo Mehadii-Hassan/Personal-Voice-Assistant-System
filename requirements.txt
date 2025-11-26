@@ -1,0 +1,8 @@
+# Speech to text conversion library
+SpeechRecognition==3.14.3
+
+# Text-to-Speech conversion library (offline)
+pyttsx3==2.90
+pyaudio
+
+wikipedia
