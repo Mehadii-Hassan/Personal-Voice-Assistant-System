@@ -6,7 +6,7 @@ This project uses speech recognization and text-to-speech (TTS) to provide a han
 
 
 ## 🛠 Features
-
+   
 - Greet the user according to the time of day (morning, afternoon, evening)
 - Recognize voice commands using Google Speech Recognition
 - Speak responses using pyttsx3
