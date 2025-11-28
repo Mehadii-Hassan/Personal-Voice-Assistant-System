@@ -1,4 +1,4 @@
-# <center>Personal-Voice-Assistant-System (Mehu)<center>
+# Personal Voice Assistant System (Mehu)
 
 "MEHU" is a python-based voice assistant that can interact with the user through speech recognization, perform tasks like opening applications, searching on Google or Wikipedia, playing music randomly, telling jokes, and having small talk.
 
