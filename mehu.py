@@ -35,6 +35,7 @@ def speak(text):
     Returns:
         voice
     """
+    print(f"Assistant: {text}")
     engine.say(text)
     engine.runAndWait() #for closing
 
@@ -108,15 +109,23 @@ while True:
         speak("My name is Mehu")
         logging.info("User asked for assistant's name.")
     
-    elif "how are you" in query:
-        speak("I am functioning at full capacity Sir")
+    elif "how are you" in query or "are you" in query or "r u" in query:
+        speak("I am fine, Thank you for asking me Sir!")
         logging.info("User asked for assistant's well-being.")
     
-    elif "made you" in query:
-        speak("I was created by Mehedy Sir")
+    elif "who are you" in query or "who r you" in query or "who r u" in query:
+        speak("My name is Mehu, and I serve as the personal assistant to Mehadi Hassan Sir")
         logging.info("User asked about assistant's creator.")
     
-    elif "thank" in query:
+    elif "made you" in query:
+        speak("I was created by Mehadi Hassan Sir")
+        logging.info("User asked about assistant's creator.")
+     
+    elif "who is mehadi?" in query or "mehadi" in query or "mehedi" in query or "hassan" in query:
+        speak("Mehadi Hassan is an aspiring AI and Data Science learner, actively exploring Machine Learning, Deep Learning and Generative AI.")
+        logging.info("User asked about assistant's creator.")
+    
+    elif "thank" in query or "thank you" in query:
         speak("It's my pleasure Sir, Always happy to help")
         logging.info("User expressed gratitude..")
 
