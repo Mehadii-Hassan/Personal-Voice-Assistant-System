@@ -50,7 +50,7 @@ pip install -r requirements.txt
 ## Author
 **Md. Mehadi Hassan**
 
-Inspired by Boktiar Ahmed Bappy
+Inspired by - **Boktiar Ahmed Bappy**
 
 
 ## License
