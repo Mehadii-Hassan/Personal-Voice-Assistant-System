@@ -12,9 +12,11 @@ This project uses speech recognization and text-to-speech (TTS) to provide a han
 - Speak responses using pyttsx3
 - Time & Date announcements
 - Wikipedia search with spoken summary
-- Open websites like Google, Facebook, YouTube
+- Open websites like Google, Facebook, YouTube, Linkedin, Github
+- Close websites like Google, Facebook, YouTube, Linkedin, Github
 - Play random music from a specified folder
 - Open system applications: Calculator, Notepad, CMD
+- Close system applications: Calculator, Notepad, CMD
 - Open Calendar (Google Calendar via browser)
 - Tell jokes and respond to basic small talk
 - Exit gracefully with a voice command
