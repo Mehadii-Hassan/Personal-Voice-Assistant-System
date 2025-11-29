@@ -7,3 +7,4 @@ pyaudio
 
 wikipedia
 google-generativeai
+pyautogui

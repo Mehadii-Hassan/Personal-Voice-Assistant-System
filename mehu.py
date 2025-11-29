@@ -8,6 +8,7 @@ import webbrowser
 import random
 import subprocess
 import google.generativeai as genai
+import pyautogui
 
 # Logging configuration
 LOG_DIR = "logs" #folder name "logs"
@@ -36,7 +37,7 @@ def speak(text):
     Returns:
         voice
     """
-    print(f"Assistant: {text}")
+    print(f"Mehu: {text}")
     engine.say(text)
     engine.runAndWait() #for closing
 
@@ -97,18 +98,64 @@ def play_music():
 
     music_playing = False  # reset flag after execution
 
+# Memory / Notes
+def save_memory(text):
+    with open("memory.txt", "a") as f:
+        f.write(text + "\n")
+    speak("Memory saved Sir")
+    logging.info("Memory saved")
+
+def read_memory():
+    if os.path.exists("memory.txt"):
+        with open("memory.txt", "r") as f:
+            data = f.read()
+        speak("Here is your saved memory")
+        speak(data)
+    else:
+        speak("No memory found")
+    logging.info("Memory read")
+
+# Google Search
+def google_search(query):
+    search = query.replace("search google for", "")
+    speak(f"Searching Google for {search}")
+    webbrowser.open(f"https://www.google.com/search?q={search}")
+    logging.info("Google search done")
+
+# Folder Create/Delete
+def create_folder(name):
+    os.makedirs(name, exist_ok=True)
+    speak(f"Folder {name} created Sir")
+    logging.info("Folder created")
+
+def delete_folder(name):
+    try:
+        os.rmdir(name)
+        speak(f"Folder {name} deleted Sir")
+        logging.info("Folder deleted")
+    except:
+        speak("Folder could not be deleted")
+        logging.error("Folder delete error")
+    
+# Screenshot Capture
+def take_screenshot():
+    ts = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    img = f"screenshot_{ts}.png"
+    pyautogui.screenshot(img)
+    speak("Screenshot taken Sir")
+    logging.info("Screenshot saved")
+
 #gemini model
 def gemini_model_response(user_input):
     GEMINI_API_KEY = ""
     genai.configure(api_key=GEMINI_API_KEY)
     model = genai.GenerativeModel("gemini-2.5-flash")
 
-    prompt = f"Your name is Mehu, you act like my personal AI Assistant. Answer the provided question in very short, Question: {user_input}"
+    prompt = f"You are my personal Assistant. Answer the provided question in short, Question: {user_input}"
     response = model.generate_content(prompt)
     result = response.text
 
     return result
-
 
 while True:
     query = takeCommand()
@@ -267,6 +314,28 @@ while True:
         logging.info("Music player closed.")
     elif "play music" in query or "music" in query or "song" in query:
         play_music()
+    
+    elif "remember this" in query:
+        save_memory(query.replace("remember this", "").strip())
+
+    elif "what did you remember" in query:
+        read_memory()
+    
+    elif "create folder" in query or "new folder" in query or "make folder" in query:
+        folder_name = query.replace("create folder", "")
+        folder_name = folder_name.replace("new folder", "")
+        folder_name = folder_name.replace("make folder", "")
+        folder_name = folder_name.strip()
+        create_folder(folder_name)
+
+    elif "delete folder" in query or "remove folder" in query:
+        folder_name = query.replace("delete folder", "")
+        folder_name = folder_name.replace("remove folder", "")
+        folder_name = folder_name.strip()
+        delete_folder(folder_name)
+    
+    elif "take a screenshot" in query or "screenshot" in query:
+        take_screenshot()
     
     elif "exit" in query or "stop" in query or "bye" in query:
         speak("Thank you for you time Sir. Have a great day ahead!")

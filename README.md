@@ -14,6 +14,9 @@ This project uses speech recognization and text-to-speech (TTS) to provide a han
 - Wikipedia search with spoken summary
 - Open websites like Google, Facebook, YouTube, Linkedin, Github
 - Close websites like Google, Facebook, YouTube, Linkedin, Github
+- Create and Delete Folder
+- Can Take Screenshot
+- Memory / Notes taking
 - Play random music from a specified folder
 - Open system applications: Calculator, Notepad, CMD
 - Close system applications: Calculator, Notepad, CMD
