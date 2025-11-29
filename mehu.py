@@ -83,7 +83,6 @@ def greeting():
         speak("Good Afternoon Sir!")
     else:
         speak("Good Evening Sir!")
-
     speak("I am at your service, please tell me how I can help you?")
 greeting()
 
@@ -112,7 +111,6 @@ def play_music():
     except Exception as e:
         speak("Sorry Sir, I could not find your music folder.")
         logging.error(f"Music folder error: {e}")
-
     music_playing = False  # reset flag after execution
 
 # Memory / Notes
@@ -162,7 +160,7 @@ def close_tab():
 
 #gemini model
 def gemini_model_response(user_input):
-    GEMINI_API_KEY = "AIzaSyAzxn8qIBEVBA_HJBqZdk2nYLMXinVo4Mo"
+    GEMINI_API_KEY = "AIzaSyCA6SSKl2BMeQN3y327ZHEnYOWr1N1ZS2w"
     genai.configure(api_key=GEMINI_API_KEY)
     model = genai.GenerativeModel("gemini-2.5-flash")
 
@@ -187,18 +185,18 @@ while True:
         speak("I am fine, Thank you for asking me Sir!")
         logging.info("User asked for assistant's well-being.")
     
-    elif "who are you" in query or "who r you" in query or "who r u" in query:
-        speak("My name is Mehu, and I serve as the personal assistant to Mehadi Hassan Sir")
-        logging.info("User asked about assistant's creator.")
-    
     elif "made you" in query:
         speak("I was created by Mehadi Hassan Sir")
         logging.info("User asked about assistant's creator.")
      
     elif "who is mehadi?" in query or "mehadi" in query or "mehedi" in query or "hassan" in query:
-        speak("Mehadi Hassan is an aspiring AI and Data Science learner, actively exploring Machine Learning, Deep Learning and Generative AI.")
+        speak("Mehadi Hassan, a CSE student at IUBAT and a learner at INCEPTION BD, is an aspiring AI and Data Science enthusiast exploring Machine Learning, Deep Learning, and Generative AI.")
         logging.info("User asked about assistant's creator.")
     
+    elif "what is inception bd?" in query or "inception bd" in query or "inception" in query or "bd" in query:
+        speak("INCEPTION BD is a leading Bangladesh-based tech learning community and training platform working on AI, Machine Learning, Deep Learning, Generative AI, and Data Science. It supports learners through workshops, bootcamps, competitions, hackathons, and project-based mentorship. Industry experts like Boktiar Ahmed Bappy and Md. Ridoy Hossain actively mentor and host AI and Data Science initiatives in the community.")
+        logging.info("User asked about INCEPTION BD.")
+
     elif "thank" in query or "thank you" in query:
         speak("It's my pleasure Sir, Always happy to help")
         logging.info("User expressed gratitude..")
@@ -226,7 +224,7 @@ while True:
         speak("Closing Facebook.")
         close_tab()
 
-    elif "open github" in query:
+    elif "open github" in query or "git" in query:
         speak("ok sir, opening github.")
         webbrowser.open("https://github.com/Mehadii-Hassan")
         logging.info("User requested to open github.")
@@ -234,7 +232,7 @@ while True:
         speak("Closing GitHub.")
         close_tab()
     
-    elif "open linkedin" in query:
+    elif "open linkedin" in query or "linkdin" in query:
         speak("ok sir, opening linkedin.")
         webbrowser.open("https://www.linkedin.com")
         logging.info("User requested to open linkedin.")
