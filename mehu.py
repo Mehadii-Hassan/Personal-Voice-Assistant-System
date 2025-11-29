@@ -160,7 +160,7 @@ def close_tab():
 
 #gemini model
 def gemini_model_response(user_input):
-    GEMINI_API_KEY = "AIzaSyCA6SSKl2BMeQN3y327ZHEnYOWr1N1ZS2w"
+    GEMINI_API_KEY = ""
     genai.configure(api_key=GEMINI_API_KEY)
     model = genai.GenerativeModel("gemini-2.5-flash")
 
