@@ -31,16 +31,10 @@ engine.setProperty("voice", voices[1].id)
 
 # This is speak function
 def speak(text):
-    """This function converts text to voice
-    Args:
-        text 
-    Returns:
-        voice
-    """
+    """This function converts text to voice"""
     print(f"Mehu: {text}")
     engine.say(text)
     engine.runAndWait() #for closing
-
 
 #This function recognize the speech and convert it to text
 def takeCommand():
@@ -48,7 +42,6 @@ def takeCommand():
     return:
         text as query
     """
-    #this code taken from documentation
     r = sr.Recognizer() #initialization
     with sr.Microphone() as source: 
         print("Listening...")
@@ -58,7 +51,24 @@ def takeCommand():
     try:
         print("Recognizing...")
         query = r.recognize_google(audio, language="en-in")
-        print(f"User said: {query}\n")
+        
+        # --- Misheard corrections ---
+        corrections = {
+            "main hoon": "mehu",
+            "may hu": "mehu",
+            "man who": "mehu",
+            "mehu": "mehu",
+            "mihu" : "mehu",
+            "main hun" : "mehu",
+            "mehul" : "mehu",
+            "mehboob" : "mehu",
+            "mein hun" : "mehu",
+            "pihu" : "mehu"
+        }
+        for wrong, correct in corrections.items():
+            query = query.lower().replace(wrong, correct)
+
+        print(f"User Said : {query}\n")
     except Exception as e:
         logging.info(e)
         print("Say that again please")
@@ -76,6 +86,13 @@ def greeting():
 
     speak("I am at your service, please tell me how I can help you?")
 greeting()
+
+# Google Search
+def google_search(query):
+    search = query.replace("search google for", "")
+    speak(f"Searching Google for {search}")
+    webbrowser.open(f"https://www.google.com/search?q={search}")
+    logging.info("Google search done")
 
 #music..
 def play_music():
@@ -102,7 +119,7 @@ def play_music():
 def save_memory(text):
     with open("memory.txt", "a") as f:
         f.write(text + "\n")
-    speak("Memory saved Sir")
+    speak("Ok Sir, I remembered it in my memory")
     logging.info("Memory saved")
 
 def read_memory():
@@ -114,13 +131,6 @@ def read_memory():
     else:
         speak("No memory found")
     logging.info("Memory read")
-
-# Google Search
-def google_search(query):
-    search = query.replace("search google for", "")
-    speak(f"Searching Google for {search}")
-    webbrowser.open(f"https://www.google.com/search?q={search}")
-    logging.info("Google search done")
 
 # Folder Create/Delete
 def create_folder(name):
@@ -145,9 +155,14 @@ def take_screenshot():
     speak("Screenshot taken Sir")
     logging.info("Screenshot saved")
 
+# Closing Tab
+def close_tab():
+    pyautogui.hotkey('ctrl', 'w')
+    logging.info("Current tab closed")
+
 #gemini model
 def gemini_model_response(user_input):
-    GEMINI_API_KEY = ""
+    GEMINI_API_KEY = "your_token_here"
     genai.configure(api_key=GEMINI_API_KEY)
     model = genai.GenerativeModel("gemini-2.5-flash")
 
@@ -160,9 +175,8 @@ def gemini_model_response(user_input):
 while True:
     query = takeCommand()
     if query is None:
-        continue  # restart loop if nothing recognized
+        continue  
     query = query.lower()
-    print(f"User said: {query}")
 
     #normal communication...
     if "your name" in query:
@@ -201,44 +215,40 @@ while True:
         logging.info("User requested to open google.")
     elif "close google" in query:
         speak("Closing Google browser.")
-        subprocess.call(["taskkill", "/F", "/IM", "chrome.exe"])
         logging.info("Chrome browser closed.")
+        close_tab()
     
     elif "open facebook" in query:
         speak("ok sir, opening facebook.")
         webbrowser.open("https://www.facebook.com")
         logging.info("User requested to open facebook.")
     elif "close facebook" in query:
-        speak("Closing Facebook browser.")
-        subprocess.call(["taskkill", "/F", "/IM", "chrome.exe"])
-        logging.info("Chrome browser closed.")
+        speak("Closing Facebook.")
+        close_tab()
 
     elif "open github" in query:
         speak("ok sir, opening github.")
         webbrowser.open("https://github.com/Mehadii-Hassan")
         logging.info("User requested to open github.")
     elif "close github" in query:
-        speak("Closing GitHub browser.")
-        subprocess.call(["taskkill", "/F", "/IM", "chrome.exe"])
-        logging.info("Chrome browser closed.")
+        speak("Closing GitHub.")
+        close_tab()
     
     elif "open linkedin" in query:
         speak("ok sir, opening linkedin.")
         webbrowser.open("https://www.linkedin.com")
         logging.info("User requested to open linkedin.")
     elif "close linkedin" in query:
-        speak("Closing LinkedIn browser.")
-        subprocess.call(["taskkill", "/F", "/IM", "chrome.exe"])
-        logging.info("Chrome browser closed.")
+        speak("Closing LinkedIn.")
+        close_tab()
 
     elif "open calendar" in query:
         speak("ok sir, opening calendar.")
         webbrowser.open("https://calendar.google.com")
         logging.info("User requested to open calendar.")
     elif "close calendar" in query:
-        speak("Closing Calendar browser.")
-        subprocess.call(["taskkill", "/F", "/IM", "chrome.exe"])
-        logging.info("Chrome browser closed.")
+        speak("Closing Calendar.")
+        close_tab()
 
     #youtube search...
     elif "open youtube" in query:
@@ -247,9 +257,8 @@ while True:
         webbrowser.open(f"https://www.youtube.com/results?search_query={query}")
         logging.info("User requested to search on youtube.")
     elif "close youtube" in query:
-        speak("Closing YouTube browser.")
-        subprocess.call(["taskkill", "/F", "/IM", "chrome.exe"])
-        logging.info("Chrome browser closed.")
+        speak("Closing YouTube.")
+        close_tab()
 
     #system file...
     elif "close calculator" in query:
@@ -309,18 +318,19 @@ while True:
     #play music
     elif "close music" in query or "close song" in query:
         speak("Closing Music player.")
-        # This will close any running media files opened via default player (like Groove Music or VLC if open)
         subprocess.call(["taskkill", "/F", "/IM", "wmplayer.exe"])
         logging.info("Music player closed.")
     elif "play music" in query or "music" in query or "song" in query:
         play_music()
     
+    # remember
     elif "remember this" in query:
         save_memory(query.replace("remember this", "").strip())
 
-    elif "what did you remember" in query:
+    elif "what did you remember" in query or "did you remember" in query:
         read_memory()
     
+    # folder create or delete
     elif "create folder" in query or "new folder" in query or "make folder" in query:
         folder_name = query.replace("create folder", "")
         folder_name = folder_name.replace("new folder", "")
@@ -334,6 +344,7 @@ while True:
         folder_name = folder_name.strip()
         delete_folder(folder_name)
     
+    # take screenshot
     elif "take a screenshot" in query or "screenshot" in query:
         take_screenshot()
     
