@@ -1,28 +1,34 @@
-# Personal Voice Assistant System (Mehu)
-
-"MEHU" is a python-based voice assistant that can interact with the user through speech recognization, perform tasks like opening applications, searching on Google or Wikipedia, playing music randomly, telling jokes, and having small talk.
-
-This project uses speech recognization and text-to-speech (TTS) to provide a hands-free assistant experience similar to Iron Man's JARVIS.
+# 🎙 Personal Voice Assistant — **Mehu**
+**Mehu** is a Python-based offline voice assistant designed for a seamless **hands-free automation experience**, inspired by Iron Man’s **JARVIS**. It understands natural voice commands and performs useful system and web-based tasks with voice + terminal responses.
 
 
-## 🛠 Features
-   
-- Greet the user according to the time of day (morning, afternoon, evening)
-- Recognize voice commands using Google Speech Recognition
-- Speak responses using pyttsx3
-- Time & Date announcements
-- Wikipedia search with spoken summary
-- Open websites like Google, Facebook, YouTube, Linkedin, Github
-- Close websites like Google, Facebook, YouTube, Linkedin, Github
-- Create and Delete Folder
-- Can Take Screenshot
-- Memory / Notes taking
-- Play random music from a specified folder
-- Open system applications: Calculator, Notepad, CMD
-- Close system applications: Calculator, Notepad, CMD
-- Open Calendar (Google Calendar via browser)
-- Tell jokes and respond to basic small talk
-- Exit gracefully with a voice command
+##  Capabilities
+-  Time-aware greetings (Morning / Afternoon / Evening)
+-  Speech recognition using **Google STT**
+-  Voice responses using **pyttsx3 (Offline TTS)**
+-  Announces **current date & time**
+-  **Wikipedia search** with spoken summaries
+-  Open browser sites: **Google, YouTube, Facebook, GitHub, LinkedIn, Calendar**
+-  Close only the **active browser tab** (no full browser shutdown)
+-  Create / delete folders via voice
+-  Save & recall **memory notes** using a `.txt` file
+-  Capture screenshots with auto **date-time filename**
+-  Control & play random local music from folder
+-  Open system apps: **Notepad, Calculator, CMD**
+-  Close system apps via voice
+-  Tell jokes & small talk responses
+-  Exit assistant smoothly with a voice command
+
+
+##  Tech Stack
+- **Language:** Python 3.11+
+- **APIs / Libraries:** `SpeechRecognition`, `pyttsx3`, `wikipedia`, `pyautogui`, `keyboard`, `os`
+- **Runs Offline:** Yes (Except STT)
+
+
+##  Prerequisites
+- Python **3.11 or higher**
+- A working microphone (Mobile mic via **WO Mic** is supported)
 
 
 ## Requirements
