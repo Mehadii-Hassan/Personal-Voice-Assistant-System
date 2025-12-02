@@ -52,7 +52,6 @@ def takeCommand():
         print("Recognizing...")
         query = r.recognize_google(audio, language="en-in")
         
-        # --- Misheard corrections ---
         corrections = {
             "main hoon": "mehu",
             "may hu": "mehu",
@@ -68,7 +67,7 @@ def takeCommand():
         for wrong, correct in corrections.items():
             query = query.lower().replace(wrong, correct)
 
-        print(f"User Said : {query}\n")
+        print(f"Mehadi Said : {query}\n")
     except Exception as e:
         logging.info(e)
         print("Say that again please")
@@ -160,7 +159,7 @@ def close_tab():
 
 #gemini model
 def gemini_model_response(user_input):
-    GEMINI_API_KEY = ""
+    GEMINI_API_KEY = "AIzaSyD5JMpGbofxqRW5Tb4Cd51vOmJAn-kcwOE"
     genai.configure(api_key=GEMINI_API_KEY)
     model = genai.GenerativeModel("gemini-2.5-flash")
 
@@ -189,7 +188,7 @@ while True:
         speak("I was created by Mehadi Hassan Sir")
         logging.info("User asked about assistant's creator.")
      
-    elif "who is mehadi?" in query or "mehadi" in query or "mehedi" in query or "hassan" in query:
+    elif "who is mehadi?" in query or "mehadi" in query or "mehedi" in query or "mehdi" in query or "hassan" in query:
         speak("Mehadi Hassan, a CSE student at IUBAT and a learner at INCEPTION BD, is an aspiring AI and Data Science enthusiast exploring Machine Learning, Deep Learning, and Generative AI.")
         logging.info("User asked about assistant's creator.")
     
@@ -224,14 +223,14 @@ while True:
         speak("Closing Facebook.")
         close_tab()
 
+    elif "close github" in query:
+        speak("Closing GitHub.")
+        close_tab()
     elif "open github" in query or "git" in query:
         speak("ok sir, opening github.")
         webbrowser.open("https://github.com/Mehadii-Hassan")
         logging.info("User requested to open github.")
-    elif "close github" in query:
-        speak("Closing GitHub.")
-        close_tab()
-    
+       
     elif "open linkedin" in query or "linkdin" in query:
         speak("ok sir, opening linkedin.")
         webbrowser.open("https://www.linkedin.com")
