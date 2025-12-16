@@ -56,6 +56,11 @@ conda activate .\venv
 pip install -r requirements.txt
 ```
 
+## 🎥 Demo Video
+
+▶️ Watch the demo here:  
+[https://www.linkedin.com/posts/md-mehadi-hassan-cse_python-nlp-artificialintelligence-activity-7405672960776122368-mbhY?utm_source=share&utm_medium=member_desktop&rcm=ACoAAF59OiEBnUq-S7MNLSIjP3CnLpOTzgPZflc](https://www.linkedin.com/posts/md-mehadi-hassan-cse_ai-pythonautomation-voiceassistant-activity-7400609475004628992-Fw-H?utm_source=share&utm_medium=member_desktop&rcm=ACoAAF59OiEBnUq-S7MNLSIjP3CnLpOTzgPZflc)
+
 ## Author
 **Md. Mehadi Hassan**
 
